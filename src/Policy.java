@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Policy {
     private String policyNumber;
     private String clientName;
@@ -82,5 +84,25 @@ public class Policy {
     public static int getCreatedPolicyCount(){
 
         return createdPolicyCount;}
+
+    @Override
+    public String   toString() {
+        return "Policy[" + policyNumber + "] " + clientName + " | " + getRiskSummary() +
+                " | Final premium: " + String.format("%.2f", calculateFinalPremium()) +
+                " | Renewal: " + String.format("%.2f", calculateRenewalPremium());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Policy policy = (Policy) o;
+        return Objects.equals(policyNumber, policy.policyNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(policyNumber);
     }
 }
+
+
